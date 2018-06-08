@@ -6,11 +6,11 @@ app = Flask(__name__)
 app.config.from_object(config)
 
 @app.route("/")
-def hello_word():
+def index():
     return "<p style='color:red;'>Programming enrich life!</p>"
 
 @app.route('/<int:parameter>/')
-def index(parameter):
+def login(parameter):
     test_d = {"k":"tianc","life":"Beautiful"}
     if parameter:
         return render_template("index.html",test = test_d["k"])
