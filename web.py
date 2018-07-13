@@ -1,21 +1,21 @@
 #coding=utf-8
 
-from flask import Flask,render_template
+from flask import Flask,render_template,url_for,redirect
+from flask_sqlalchemy import SQLAlchemy
 import config
 app = Flask(__name__)
 app.config.from_object(config)
 
+db = SQLAlchemy(app)
+db.create_all()
+
 @app.route("/")
 def index():
-    return "<p style='color:red;'>Programming enrich life!</p>"
+    return render_template("index.html")
 
-@app.route('/<int:parameter>/')
-def login(parameter):
-    test_d = {"k":"tianc","life":"Beautiful"}
-    if parameter:
-        return render_template("index.html",test = test_d["k"])
-    else:
-        return render_template("index.html",test = test_d["life"])
+@app.route("/login/")
+def login():
+    return render_template("login.html")
 
 if __name__ == '__main__':
     app.run()
