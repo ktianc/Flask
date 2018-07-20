@@ -1,9 +1,33 @@
 {% extends "base.html" %}
 {% block title %}
-    ktianc
+    backups
 {% endblock %}
 
 {% block context %}
-    <a href="{{ url_for('login')}}">redirect</a>
-    <img src="{{  url_for('static',filename='images/gou.jpg')}}" alt="gougou">
+    <form method="POST">
+        web server:
+        <select name="webserver">
+            <option value="apache">apache</option>
+            <option value="nginx">nginx</option>
+            <option value="tomcat">tomcat</option>
+            <option value="mysql">mysql</option>
+        </select>
+        <br>
+        project name <input type="text" name="project_name"><br>
+        file name:<input type="text" name="localname"><br>
+        remote dir:<input type="text" name="remotedir"><br>
+        <input type="submit" value="submit">
+    </form>
+    <br>
+    <br>
+    <h3 align="center">WEB BACKUPS LIST</h3>
+    <div align="center">
+        {% for name in projectname %}
+            project name :  {{ name }}
+            <input style="background-color:cornflowerblue;" type="button" value="backup" name="backup">
+            <input style="background-color:red;" type="button" value="delete" name="delete"><br>
+        {% endfor %}
+    </div>
+    <p align="center"><img src="{{  url_for('static',filename='images/mingren.jpg')}}" width="1600" height="900" alt=u"鸣人"></p>
+
 {% endblock %}

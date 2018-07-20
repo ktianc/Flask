@@ -1,0 +1,54 @@
+SQLALCHEMY_DATABASE_URI   // 用于连接数据库
+SQLALCHEMY_TRACK_MODIFICATIONS //如果设置成True(默认情况)，Flask-SQLAlchemy 将会追踪对象的修改并且发送信号。这需要额外的内存， 如果不必要的可以禁用它。如果你不显示的调用它，在最新版的运行环境下，会显示警告。
+
+db_SQLAlchemy(app)   //SQLAlchemy函数，将刚刚创建的Flask框架，与工程所需要使用的数据库绑定到一起，以便实现工程与数据库连接，实现数据操作。
+
+db.Model   //继承db.Model类，将我们当前创建的映射表和数据库db绑定在一起，
+此时工程文件调用create_all函数后，会自动将绑定后的映射表文件创建在数据库文件中。
+
+db.Column  //创建映射表字段，以下为最常见的类型
+
+Integer : 整数
+String(size)  : 有长度的字符串
+Text   : 存储较长的unicode文本
+Date Time ： 存储时间类型数据
+Float  ： 存储浮点数
+Boolean ： 存储布尔值
+Pickle Type : 存储一个python对象
+LargeBinary : 存储一个任意大的二进制数据
+
+其他参数：
+
+primary_key = True  // 设置当前字段为主键
+unique = True  // 设置当前字段不可重复
+autoincrement =True  // 设置这个主键为自増长的
+nullable = False  //设置这个字段能否为空，默认可以为空
+
+
+db.create_all()  //创建所有表。
+
+添加数据
+
+db.session.add(table_name(column="data")) //添加到缓存区
+db.session.commit()  //提交到数据库
+db.session.flush()   //添加到数据库，但不提交
+
+查找数据
+
+table_name.query.all()   //查找所有
+table_name.query.filter(table_name.column=="data_name").first().name()  //在table_name表中查找column列为data_name的数据,并将这条数据的name列筛选出来
+
+修改数据
+
+data = example.query.filter(example.name=="k").first()
+data.age = "18"
+db.session.commit()
+
+
+删除数据
+
+db.session.delete(example.query.filter(example.name=="geng").first())
+db.session.commit()
+
+session.execute(sql_1)
+

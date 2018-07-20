@@ -1,0 +1,26 @@
+request
+
+对于web应用，与客户端发送给服务器的数据交互至关重要。在Flask中由全局的request对象来提供这些信息。
+
+导入request
+
+from flask import request
+
+request属性
+
+method:请求的方法，比如POST.GET
+
+form : 返回form的内容
+
+args ： 返回请求中的参数
+
+values ： 返回请求中的参数和form
+
+cookies：cookies信息
+
+headers：请求headers信息，返回的结果是list
+
+data : 请求的数据
+
+files : 请求上传的文件
+
