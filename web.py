@@ -21,25 +21,48 @@ class backups(db.Model):  #创建backups表模型
 db.create_all()   #创建所有表
 
 
+
 @app.route("/",methods=["GET","POST"])  #route装饰器，访问/触发index
 def index():  #编辑主页数据
     if request.method == "POST": #请求方式为POST触发
+        project_list = []
+        for x in db.session.execute("select project from backups").fetchall():
+            project_list.append(x.project)
         project_name = request.form["project_name"] #获取form表格中的project_name
-        webserver = request.form["webserver"]
-        localname = request.form["localname"]
-        remotedir = request.form["remotedir"]
-        db.session.add(backups(project=project_name,client_webserver=webserver,client_dirname=localname,server_dirname=remotedir))
-        #添加数据到数据库
-        db.session.commit() #提交
+        if project_name not in project_list:
+            webserver = request.form["webserver"]
+            localname = request.form["localname"]
+            remotedir = request.form["remotedir"]
+            db.session.add(backups(project=project_name,client_webserver=webserver,client_dirname=localname,server_dirname=remotedir))
+            #添加数据到数据库
+            db.session.commit() #提交
 
+        else:
+            return render_template("index.html",Error="Error:The project name cannot be repeated")
+
+    return render_template("index.html")
+
+
+
+@app.route('/project',methods=["GET","POST"])
+def project():
     project_list = []
-    # for x in backups.query.filter(backups.project).all():
-    #查询project列不为aaa的所有数据
     for x in db.session.execute("select project from backups").fetchall():
         project_list.append(x.project)
 
+    if request.method=="POST":
+        option = request.form["operation"]
+        input_project = request.form["project"]
+        if input_project in project_list:
 
-    return render_template("index.html",projectname = project_list)
+            if option == "delete":
+                db.session.delete(backups.query.filter(backups.project == input_project).first())
+                db.session.commit()
+                return redirect(url_for('project'))
+        else:
+            pass
+
+    return render_template("project.html",projectname = project_list)
 
 
 

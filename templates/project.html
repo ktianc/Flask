@@ -1,0 +1,60 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    project
+{% endblock %}
+
+{% block head %}
+{#    <script>#}
+{#        function judge(){#}
+{#            alert({{ show_context }});#}
+{#        }#}
+{#    </script>#}
+
+{% endblock %}
+
+{% block context %}
+    <h3 align="center">WEB BACKUPS LIST</h3>
+    <form method="post">
+        <div align="center">
+            <table>
+                <tr>
+                    <td>
+                        Project name:<input type="text" name="project">
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        delete : <input type="radio" name="operation" value="delete">
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        backup : <input type="radio" name="operation" value="backup">
+                    </td>
+                </tr>
+                <tr>
+                    <td align="center">
+                        <input type="submit" value="submit">
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </form>
+        <div>
+            <table cellspacing="10">
+                <tr>
+                    <th>Project name</th>
+                </tr>
+                {% for name in projectname %}
+                    <tr align="center">
+                        <td>{{ name }}</td>
+                    </tr>
+                {% endfor %}
+            </table>
+        </div>
+
+
+    
+    
+{% endblock %}
