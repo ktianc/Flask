@@ -30,7 +30,7 @@
                 </tr>
                 <tr>
                     <td>
-                        backup : <input type="radio" name="operation" value="backup">
+                        backup : <input type="radio" name="operation" value="backup" checked="checked">
                     </td>
                 </tr>
                 <tr>
@@ -54,7 +54,11 @@
             </table>
         </div>
 
-
+    <p align="center">
+        <a href="{{ url_for('index') }}">
+            <img src="{{ url_for('static',filename='images/gou.jpg') }}" alt="index" width="1600" height="950">
+        </a>
+    </p>
     
     
 {% endblock %}
