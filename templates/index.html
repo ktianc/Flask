@@ -9,7 +9,7 @@
 
 {% block context %}
 
-    <form align="center" method="POST">
+    <form align="center" method="POST" enctype="multipart/form-data">
         web server:
         <select name="webserver">
             <option value="apache">apache</option>
@@ -19,6 +19,10 @@
         </select>
         <br>
         project name:<input type="text" name="project_name"><p style="color:red;">{{ Error }}</p>
+        host :<input type="text" name="host"><br>
+        user :<input type="text" name="user"><br>
+        password:<input type="password" name="password"><br>
+        key file:<input type="file" name="file"><br>
         file name:<input type="text" name="localname"><br>
         remote dir:<input type="text" name="remotedir"><br>
         <input type="submit" value="submit">

@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+
+
+{% block title %}
+    Error
+{% endblock %}
+
+
+{% block context %}
+    <div align="center" style="color:red;">{{ error_hint }}</div>
+    <p align="center">
+        <a href="{{ url_for('index') }}">
+            <img src="{{ url_for('static',filename='images/gou.jpg') }}" alt="index">
+        </a>
+    </p>
+{% endblock %}
