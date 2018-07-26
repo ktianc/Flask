@@ -110,19 +110,17 @@ def project():
                 SERVER = db.session.execute("select server_dirname from backups where project = '{0}' ".format(input_project)).fetchall()[0].server_dirname
 
                 #fab -f service.py -H xxx:22 -u xxx -p xxx -i xxx.rsa service:client,server
-                os.chdir("/usr/local/web_test/static/scripts/") #更改execult directory
+                os.chdir("/usr/local/backups/static/scripts/") #更改execult directory
 
                 if not KEY_FILE: #如果密钥文件为空执行
                     os.system("fab -f html.py -H '{0}:22' -u {1} -p {2} {3}:{4},{5}".format(IP,USER,PASSWORD,WEB,CLIENT,SERVER))
-                    return "success == None"
                 else: #如果密钥文件不为空执行
                     os.system("fab -f html.py -H '{0}:22' -u {1} -p {2} -i {3} {4}:{5},{6}".format(IP,USER,PASSWORD,KEY_FILE,WEB,CLIENT,SERVER))
-                    return "success != None"
 
 
 
         else: #如果输入需要操作的项目名不存在
-            return render_template("project.html",Error=u"输入的项目名称不存在")
+            return render_template("project.html",projectname = project_list,Error=u"输入的项目名称不存在")
 
     return render_template("project.html",projectname = project_list)  #渲染模板，并传送列表
 
